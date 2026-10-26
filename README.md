@@ -2,6 +2,10 @@
 
 A visual editor for Dear ImGui interfaces. You build on a canvas that renders with the real widget code, then export clean C++ that draws exactly what you saw. A running program can also follow the project file live.
 
+## Download
+
+Get the zip from [Releases](https://github.com/whowould/imgui_studio/releases), unzip it, and run `bin\imgui_studio.exe`. Keep the `bin\kit` folder next to the exe: exports copy the kit from there. Every push is also built by GitHub Actions.
+
 ## Two kinds of project
 
 **New** offers four templates:

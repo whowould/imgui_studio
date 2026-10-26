@@ -1,0 +1,56 @@
+# Builds ImGui Studio on Windows. Pushing a tag like v1.2.0 also publishes a release with a ready-to-run zip;
+# running it by hand (Actions > Build > Run workflow) only builds and keeps the zip as an artifact.
+name: Build
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # CMake picks the newest Visual Studio on the runner.
+      - name: Configure
+        run: cmake -S . -B build -A x64
+
+      - name: Build
+        run: cmake --build build --config Release --parallel
+
+      - name: Check an export compiles
+        shell: pwsh
+        run: |
+          # A GUI program, so wait for it explicitly.
+          $run = Start-Process ./bin/imgui_studio.exe -ArgumentList "--template", "loader", "--export", "`"$env:RUNNER_TEMP\export`"" -Wait -PassThru
+          if ( $run.ExitCode -ne 0 -or -not ( Test-Path "$env:RUNNER_TEMP/export/loader.cpp" ) ) { throw "The export failed ($($run.ExitCode))" }
+
+      - name: Package
+        shell: pwsh
+        run: |
+          $name = if ( $env:GITHUB_REF_TYPE -eq "tag" ) { "ImGuiStudio-$env:GITHUB_REF_NAME-win64" } else { "ImGuiStudio-win64" }
+          $stage = "$env:RUNNER_TEMP/$name"
+          New-Item -ItemType Directory -Force $stage | Out-Null
+          Copy-Item bin -Destination "$stage/bin" -Recurse
+          Copy-Item examples -Destination "$stage/examples" -Recurse
+          Copy-Item README.md $stage
+          Compress-Archive -Path "$stage/*" -DestinationPath "$name.zip"
+          "ZIP=$name.zip" | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ImGuiStudio-win64
+          path: ${{ env.ZIP }}
+
+      - name: Release
+        if: github.ref_type == 'tag'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "${{ github.ref_name }}" "${{ env.ZIP }}" --title "ImGui Studio ${{ github.ref_name }}" --generate-notes
