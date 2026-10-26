@@ -1,0 +1,332 @@
+{
+  "format": "imgui-studio/3",
+  "name": "Showcase",
+  "project": "app",
+  "theme": {
+    "namespace": "showcase",
+    "width": 640.0,
+    "height": 420.0,
+    "palette": 1,
+    "toggles": 1,
+    "sliders": 1,
+    "buttons": 2,
+    "fields": 0,
+    "control_rounding": 8.0,
+    "rounding": 16.0,
+    "window_alpha": 0.96,
+    "resizable": true,
+    "transition": 2,
+    "plugin": "../bin/plugins/widgets.dll",
+    "accent": [
+      0.298,
+      0.49,
+      0.94,
+      1.0
+    ]
+  },
+  "screens": [
+    {
+      "uid": 107,
+      "name": "Dashboard",
+      "id": "dashboard",
+      "elements": [
+        {
+          "uid": 108,
+          "kind": "image",
+          "text": "Logo",
+          "id": "logo",
+          "rect": [
+            32,
+            24,
+            40,
+            40
+          ],
+          "image": 101,
+          "rounding": 10.0
+        },
+        {
+          "uid": 109,
+          "kind": "text",
+          "text": "Dashboard",
+          "id": "dashboard",
+          "rect": [
+            84,
+            24,
+            300,
+            22
+          ],
+          "size": 18.0,
+          "role": 0
+        },
+        {
+          "uid": 110,
+          "kind": "text",
+          "text": "Everything at a glance",
+          "id": "subtitle",
+          "rect": [
+            84,
+            48,
+            300,
+            16
+          ],
+          "role": 2
+        },
+        {
+          "uid": 111,
+          "kind": "icon",
+          "text": "Bell",
+          "id": "bell",
+          "rect": [
+            572,
+            32,
+            20,
+            20
+          ],
+          "icon": 20,
+          "pin_x": 1
+        },
+        {
+          "uid": 106,
+          "kind": "tabs",
+          "text": "Sections",
+          "id": "sections",
+          "rect": [
+            32,
+            92,
+            576,
+            36
+          ],
+          "options": [
+            "Overview",
+            "Settings"
+          ]
+        },
+        {
+          "uid": 112,
+          "kind": "instance",
+          "text": "Players card",
+          "id": "players",
+          "rect": [
+            32,
+            148,
+            180,
+            84
+          ],
+          "component": 102,
+          "tab_owner": 106,
+          "tab_index": 0
+        },
+        {
+          "uid": 113,
+          "kind": "instance",
+          "text": "Ping card",
+          "id": "ping",
+          "rect": [
+            228,
+            148,
+            180,
+            84
+          ],
+          "component": 102,
+          "tab_owner": 106,
+          "tab_index": 0
+        },
+        {
+          "uid": 114,
+          "kind": "custom",
+          "text": "Health ring",
+          "id": "health_ring",
+          "rect": [
+            448,
+            140,
+            120,
+            120
+          ],
+          "function": "ring_meter",
+          "tab_owner": 106,
+          "tab_index": 0
+        },
+        {
+          "uid": 115,
+          "kind": "custom",
+          "text": "Badge",
+          "id": "badge",
+          "rect": [
+            32,
+            252,
+            140,
+            30
+          ],
+          "function": "status_badge",
+          "tab_owner": 106,
+          "tab_index": 0
+        },
+        {
+          "uid": 116,
+          "kind": "checkbox",
+          "text": "Stream proof",
+          "id": "stream_proof",
+          "rect": [
+            32,
+            152,
+            220,
+            22
+          ],
+          "on": true,
+          "tab_owner": 106,
+          "tab_index": 1
+        },
+        {
+          "uid": 117,
+          "kind": "slider",
+          "text": "Field of view",
+          "id": "field_of_view",
+          "rect": [
+            32,
+            192,
+            280,
+            28
+          ],
+          "number": 90.0,
+          "min": 60.0,
+          "max": 120.0,
+          "tab_owner": 106,
+          "tab_index": 1
+        },
+        {
+          "uid": 118,
+          "kind": "dropdown",
+          "text": "Quality",
+          "id": "quality",
+          "rect": [
+            32,
+            236,
+            200,
+            32
+          ],
+          "options": [
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "choice": 2,
+          "tab_owner": 106,
+          "tab_index": 1
+        },
+        {
+          "uid": 119,
+          "kind": "text",
+          "text": "Ready",
+          "id": "status",
+          "rect": [
+            32,
+            372,
+            300,
+            18
+          ],
+          "role": 2,
+          "dynamic": true,
+          "pin_y": 1
+        },
+        {
+          "uid": 120,
+          "kind": "button",
+          "text": "Refresh",
+          "id": "refresh",
+          "rect": [
+            340,
+            364,
+            120,
+            36
+          ],
+          "icon": 26,
+          "toast": "Refreshed",
+          "pin_x": 1,
+          "pin_y": 1
+        },
+        {
+          "uid": 121,
+          "kind": "button",
+          "text": "Launch",
+          "id": "launch",
+          "rect": [
+            472,
+            364,
+            136,
+            36
+          ],
+          "icon": 7,
+          "primary": true,
+          "lockable": true,
+          "enabled": true,
+          "pin_x": 1,
+          "pin_y": 1,
+          "toast": "Launching"
+        }
+      ]
+    }
+  ],
+  "components": [
+    {
+      "uid": 102,
+      "name": "Stat card",
+      "id": "stat_card",
+      "w": 180,
+      "h": 84,
+      "elements": [
+        {
+          "uid": 103,
+          "kind": "panel",
+          "text": "Card",
+          "id": "card",
+          "rect": [
+            0,
+            0,
+            180,
+            84
+          ]
+        },
+        {
+          "uid": 104,
+          "kind": "text",
+          "text": "Players",
+          "id": "label",
+          "rect": [
+            16,
+            14,
+            148,
+            18
+          ],
+          "role": 2,
+          "size": 12.0
+        },
+        {
+          "uid": 105,
+          "kind": "text",
+          "text": "128",
+          "id": "value",
+          "rect": [
+            16,
+            36,
+            148,
+            32
+          ],
+          "role": 0,
+          "size": 24.0,
+          "dynamic": true
+        }
+      ]
+    }
+  ],
+  "images": [
+    {
+      "uid": 101,
+      "name": "logo",
+      "id": "logo",
+      "width": 96,
+      "height": 96,
+      "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAE10lEQVR4nO2dW2wUVRjH/7Ozu+2WlotVlFsLlKstQiRCEDTGBEi8cAk8kPBAQuKDYmIivvjAkw8afQOJEh/00Uh4UG6GRI1Koly9tKHcEmtbCFAkNO12uzuzO+aMWbOF3c6Z3TP7zdl+v6Tpy+lk5v+b78yZc85uDSjilX33HUwgjr031VBxnIoOMtFCD0KG7z/k0NXKiPhpzOGrz0jKFgcfXDV4VgCHXz4y2Y0rgMOvHK8MSwrg8NUxXpZFBXD46imV6UMCOPzgKJatr2Eoo54xAvjuD54HM/5fAIdfPQqz5i6IGBYQBgHc/VSffOZcAcSwAGIM7n5o4QoghgUQwwKIYQHEsABiWAAxUeoTeHRyBJ+/0+TZ7vX9Q+i/m0OtwRVADAsghgUQwwKIYQHEsABiWAAxLIAYFkAMCyCGBRDDAib6ZFwltEw38VxHDO2tJmY/ZqKx3oBhAMlRB7fu5dDdZ+OXbhuX/rYRVrQUMOORCF57KYFnFhU//SmTDEyZZGLxHBNbnq3DtRtZfHYyhe7eLMKGdl3Q2vYYDuxpLBl+MRbOMvHB7kZsXVuHsKFVBbzwVAxvb2twuxm/RCLA7o31iBjAkdNphAVtKmDhLBNvbS0v/EJ2ra/H0hYTYUEbAW+8mkBUQW5CoDiWGZIrD8lpeFMfV/LVDC5zHzex/uk4woBWz4A8N//J4cTZDDp7bAyNOO6op2NuFC+vjuOJaXL31IaVcXx7PgNqtBNw6kIGnx5PwSoY2g8MAtdvZnHyXAZ7tyewZmlM6pki3iN679AOTbXpggSnuywc+Hps+IWkLQcffjWCnttyoa5oo7//tBEwknZw8GjKs52dBb44NSp1zAUz6UdD2gj47jcLwym5LyK5eN3GvSHvtm0z6C+f/gwkuXDNkm0KxwEu9XrP/zRPpr98+jOQpOe2v11xfXe82zfU/Td5R4k2AoYku588w6Pe7UX4Kt8valpANutPgGXLtad+I9ZGgF9k7mzxrBCjK0pqVkBTwltAKuMgR7zhWhsBsai/vrpluvelyQ5rg0QbAc1N/gS0Sbxk9UqMlIJGGwFPtspPGyyabbof/PDiSj/9WrE2AjaslJ8+3rxGbulRrBVTo42AJXNMvLjCW8Ly+VF3p4QXYudEVw8L8MWeTQmsWlw63PbWKN7dIbds+eOfljt7Sg39fKwP4lFg384Gd1r6+98z7of2RNgzmyN4flncXbSXnVoQawdhQCsBedZ1xNyfcvnhD0t6zSBotHkGqGIw6bibtMKCNgLSCvprMfXw8Tcpdx05LGgj4JOjoyWXImXDP3QihV+75dcVqoE2Aq7023j/y2RZlZBKO/jo8AiOnwnHg1dLAYJzV23sPZTE5b6s9F3/c5eFNw8Ou7/DiLZfWbZsXhTr2mNY0mK6e4ESccNdA7ifdNA3kEPnXzZ+6rQwMEg/31Nzw1CBCFj86I5WXVAtwgKIYQHEsABiWAAxLIAYFkBMRNV/BWX8I7LnCiCGBYRBAHdD1SefOVcAMSwgLAK4G6oehVmPqQCWEDwPZsxdEDEPCeAqCI5i2RatAJagnlKZluyCWII6xsty3GcAS6gcrww9H8IsoXxksvM1E6rrFpZq4+em9TUM5WpQn1FFawFcEZXfmMoWYyaajGOKFrL+BZ3igRGAozp1AAAAAElFTkSuQmCC"
+    }
+  ],
+  "categories": []
+}
